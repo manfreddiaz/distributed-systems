@@ -1,0 +1,1 @@
+idlj -fall -pkgTranslate interop ca.concordia.encs.distributed.client.corba.model ClinicServices.idl

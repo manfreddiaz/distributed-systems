@@ -1,0 +1,31 @@
+subprojects {
+	apply plugin: 'java'
+
+	group = 'ca.concordia.distributed'
+	version = '1.0'
+
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		compile group: 'junit', name: 'junit', version: '4.12'
+		compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.7'
+		compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+		compile group: 'com.google.inject', name: 'guice', version: '4.0'
+	}
+    jar {
+
+    }
+}
+
+task copyJars(type: Copy, dependsOn: subprojects.jar) {
+	from(subprojects.jar)
+	into project.file('build')
+}
+
+task copyDeps(type: Copy) {
+	from(subprojects.configurations.runtime)
+	into project.file('build/lib')
+}
+
+task copyFiles(dependsOn: [copyJars, copyDeps])

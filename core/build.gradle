@@ -1,0 +1,13 @@
+group 'ca.concordia.distributed'
+version '1.0-SNAPSHOT'
+dependencies {
+    compile project(':shared')
+    compile project(':communication')
+}
+jar {
+    doFirst {
+        manifest {
+            attributes 'Class-Path': configurations.runtime.files.collect { it.getName() }.join(' ')
+        }
+    }
+}

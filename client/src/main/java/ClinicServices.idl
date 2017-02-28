@@ -1,0 +1,16 @@
+module interop {
+    struct Message {
+        string Method;
+        short Status;
+        string Content;
+    };
+    interface ClinicService {
+        Message createDRecord (in string managerID, in string firstName, in string lastName, in string address, in string phone,
+            		in string specialization);
+        Message createNRecord (in string managerID, in string firstName, in string lastName, in string designation, in string status,
+                in long statusDate);
+        Message getRecordCounts(in string managerID, in string recordType);
+        Message editRecord(in string managerID, in string recordID, in string fieldName, in string newValue);
+        Message transferRecord(in string managerID, in string recordID, in string remoteClinicServerName);
+    };
+};

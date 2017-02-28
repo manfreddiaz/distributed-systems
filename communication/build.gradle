@@ -1,0 +1,26 @@
+group 'ca.concordia'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':core')
+}
+jar {
+    doFirst {
+        manifest {
+            attributes 'Main-Class': 'ca.concordia.encs.distributed.rmi.ServerRMIEndpoint',
+                    'Class-Path': configurations.runtime.files.collect { "lib/${it.name}" }.join(' ')
+        }
+    }
+}
+test {
+    systemProperty 'server.location', 'Montreal'
+    systemProperty 'cluster.size', '3'
+    systemProperty 'cluster.port', '9000'
+    systemProperty 'server.address', '224.0.0.3'
+}
